@@ -1,0 +1,22 @@
+[package]
+name = "api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# axum web框架
+axum = "0.7.7"
+tokio = { version = "1.41.1", features = ["full"] }
+tower = "0.5.1"
+# 数据库操作
+sea-orm = { version = "1.1.0", features = [ "sqlx-mysql", "runtime-tokio-rustls", "macros", "debug-print", "with-chrono" ] }
+# 跨域中间件
+tower-http = { version = "0.6.1", features = ["full"] }
+# 配置读取库
+dotenv = "0.15.0"
+# 序列化
+serde = { version = "1.0.214", features = ["derive"] }
+# 全局变量
+lazy_static = "1.5.0"
+
+log = "0.4.22"
