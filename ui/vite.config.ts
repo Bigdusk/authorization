@@ -31,13 +31,13 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  server: {
-    proxy: {
-      '/dev': {
-        target: 'http://api.hhzx.top',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/dev/, "")
-      }
-    }
-  }
+  // server: {
+  //   proxy: {
+  //     '/dev': {
+  //       target: 'http://api.hhzx.top',
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/dev/, "")
+  //     }
+  //   }
+  // }
 })

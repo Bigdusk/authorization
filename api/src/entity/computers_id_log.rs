@@ -7,12 +7,12 @@ use serde::{Deserialize, Serialize};
 #[sea_orm(table_name = "computers_id_log")]
 pub struct Model {
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     #[sea_orm(unique)]
     pub ip_address: String,
     pub hostname: Option<String>,
     pub location: Option<String>,
-    pub authorization_id: Option<i32>,
+    pub authorization_id: Option<i64>,
     pub start_at: Option<DateTimeUtc>,
     pub last_seen: Option<DateTimeUtc>,
 }

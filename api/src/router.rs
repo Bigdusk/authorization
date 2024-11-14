@@ -1,15 +1,19 @@
 use std::time::Duration;
 
-use axum::{http::Method, routing::get, Router};
+use axum::{http::Method, middleware, routing::{get, post}, Router};
 use tower::ServiceBuilder;
 use tower_http::{compression::CompressionLayer, cors::{Any, CorsLayer}, timeout::TimeoutLayer, trace::TraceLayer};
 
-use crate::utils::database;
+use crate::{auth::login_auth, controller::{card_key::{card_keys_insert, query_all_card_key}, login::login}, utils::database};
 
 pub async  fn app() -> Router<()>{
     let db = database::new_conn().await;
     let app = Router::new()
     .route("/", get(hi))
+    .route("/login", post(login))
+    .route("/card_keys_insert", post(card_keys_insert))
+    .route("/query_all_card_key", get(query_all_card_key))
+    .route_layer(middleware::from_fn(login_auth))
     .with_state(db)
     .layer(
         // 官方推荐在ServiceBuilder上一次性载入

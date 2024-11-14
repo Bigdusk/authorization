@@ -7,8 +7,8 @@ use serde::{Deserialize, Serialize};
 #[sea_orm(table_name = "user_ip_logs")]
 pub struct Model {
     #[sea_orm(primary_key)]
-    pub log_id: i32,
-    pub user_id: i32,
+    pub log_id: i64,
+    pub user_id: i64,
     pub ip_address: String,
     pub login_time: Option<DateTimeUtc>,
     pub location: Option<String>,

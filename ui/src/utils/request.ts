@@ -1,6 +1,6 @@
 import axios from "axios";
 const axios_util = axios.create({
-    baseURL: "/dev",
+    baseURL: "http://localhost:8888",
     timeout: 60000
 });
 
@@ -13,7 +13,7 @@ interface ApiResponse<T> {
 //请求拦截器
 axios_util.interceptors.request.use(
     config => {
-        config.headers.Authorization = localStorage.getItem('authorization')
+        config.headers.Authorization = localStorage.getItem('token')
         return config;
     },
     error => {

@@ -7,11 +7,11 @@ use serde::{Deserialize, Serialize};
 #[sea_orm(table_name = "announcements")]
 pub struct Model {
     #[sea_orm(primary_key)]
-    pub announcement_id: i32,
+    pub announcement_id: i64,
     pub title: String,
     #[sea_orm(column_type = "Text")]
     pub content: String,
-    pub published_by: i32,
+    pub published_by: i64,
     pub publish_date: Option<DateTimeUtc>,
     pub expiration_date: Option<DateTimeUtc>,
     pub is_active: Option<i8>,

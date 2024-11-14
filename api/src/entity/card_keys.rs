@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 #[sea_orm(table_name = "card_keys")]
 pub struct Model {
     #[sea_orm(primary_key)]
-    pub key_id: i32,
+    pub key_id: i64,
     #[sea_orm(unique)]
     pub card_key: String,
     pub r#type: String,
@@ -16,7 +16,7 @@ pub struct Model {
     pub activated_at: Option<DateTimeUtc>,
     pub expires_at: Option<DateTimeUtc>,
     pub is_active: Option<i8>,
-    pub authorization_id: Option<i32>,
+    pub authorization_id: Option<i64>,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
