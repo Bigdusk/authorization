@@ -37,7 +37,7 @@ const card_key_info = ref<CardKeyInfo>({
 
 async function create_card() {
   spin_show.value = true
-  post<string[]>('/card_keys_insert', card_key_info.value).then(r => {
+  post<string[]>('/card_keys/insert', card_key_info.value).then(r => {
     data.value.length = 0
     r.forEach(element => {
       data.value.push({
@@ -64,17 +64,17 @@ const spin_show = ref(false)
 
       <n-card title="生成" hoverable>
 
-        <n-form ref="formRef" model="user">
+        <n-form ref="formRef">
           {{ card_key_info }}
-          <n-form-item label="卡密名称" path="user.username">
+          <n-form-item label="卡密名称">
             <n-input v-model:value="card_key_info.name" type="text" placeholder="名称" />
           </n-form-item>
 
-          <n-form-item label="有效时间" path="user.username">
+          <n-form-item label="有效时间">
             <n-input v-model:value="card_key_info.day" type="text" placeholder="按天数算" />
           </n-form-item>
 
-          <n-form-item label="生成数量" path="user.username">
+          <n-form-item label="生成数量">
             <n-input-number v-model:value="card_key_info.num" clearable :precision="0" placeholder="数量" />
           </n-form-item>
 

@@ -12,9 +12,9 @@ pub struct Model {
     pub card_key: String,
     pub r#type: String,
     pub value: Option<String>,
-    pub created_at: Option<DateTimeUtc>,
-    pub activated_at: Option<DateTimeUtc>,
-    pub expires_at: Option<DateTimeUtc>,
+    pub created_at: Option<DateTime>,
+    pub activated_at: Option<DateTime>,
+    pub expires_at: Option<DateTime>,
     pub is_active: Option<i8>,
     pub authorization_id: Option<i64>,
 }

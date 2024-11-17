@@ -67,5 +67,8 @@ async fn authorize_current_user(auth_token: &str) -> Option<CurrentUser> {
 fn allow_path_all() -> Vec<&'static str> {
     vec![
         "/login",
+        "/computer/auth",
+        "/computer/info",
+        "/card_key/redeem"
     ]
 }

@@ -2,10 +2,10 @@ use axum::extract::State;
 use axum::{Extension, Json};
 use chrono::Local;
 use rand::{thread_rng, Rng};
-use sea_orm::{EntityTrait, IntoActiveModel, Set};
+use sea_orm::{EntityTrait, Set};
 use sea_orm::{ActiveValue::NotSet, DatabaseConnection};
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
+use serde_json::Value;
 
 use crate::auth::CurrentUser;
 use crate::entity::card_keys;
@@ -50,11 +50,11 @@ pub async fn card_keys_insert(
             card_key: Set(key.clone()),
             r#type: Set(card_keys_info.name.clone()),
             value: Set(Some(card_keys_info.day.clone())),
-            created_at: Set(Some(Local::now().to_utc())),
+            created_at: Set(Some(Local::now().naive_local())),
             activated_at: Set(None),
             expires_at: Set(None),
             is_active: Set(Some(0)), //0false，1true
-            authorization_id: Set(Some(0)),
+            authorization_id: Set(None),
         };
 
         card_arry.push(card_key);
@@ -73,7 +73,7 @@ pub async fn card_keys_insert(
 }
 
 ///查询所有卡密
-pub async fn query_all_card_key(
+pub async fn card_key_query_all(
     State(db): State<DatabaseConnection>,
 ) -> Json<Value>
 {

@@ -1,35 +1,31 @@
 <script setup lang="ts">
-import { h } from 'vue'
+import { h, onMounted, ref } from 'vue'
 import { NButton } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
 import { message } from '@/utils/discrete_api';
-
-interface Song {
-    no: number
-    title: string
-    length: string
-}
+import type { Notice } from '@/entity';
+import { get } from '@/utils/request';
 
 function createColumns({
     play
 }: {
-    play: (row: Song) => void
-}): DataTableColumns<Song> {
+    play: (row: Notice) => void
+}): DataTableColumns<Notice> {
     return [
         {
-            title: 'No',
-            key: 'no'
-        },
-        {
-            title: 'Title',
+            title: '文章名称',
             key: 'title'
         },
         {
-            title: 'Length',
-            key: 'length'
+            title: '发布时间',
+            key: 'publish_date'
         },
         {
-            title: 'Action',
+            title: '作者',
+            key: 'user_id'
+        },
+        {
+            title: '操作',
             key: 'actions',
             render(row) {
                 return h(
@@ -40,26 +36,43 @@ function createColumns({
                         size: 'small',
                         onClick: () => play(row)
                     },
-                    { default: () => 'Play' }
+                    { default: () => '删除' }
                 )
             }
         }
     ]
 }
 
-const data: Song[] = [
-    { no: 3, title: 'Wonderwall', length: '4:18' },
-    { no: 4, title: 'Don\'t Look Back in Anger', length: '4:48' },
-    { no: 12, title: 'Champagne Supernova', length: '7:27' }
-]
+const data = ref<Notice[]>([])
 
 const columns = createColumns({
-    play(row: Song) {
-        message.info(`Play ${row.title}`)
+    play(row: Notice) {
+        delete_notice(row.announcement_id)
     }
 })
 
 const pagination = false as const
+
+function notice_query_all() {
+    get<Notice[]>('/notice/query/all').then(r => {
+        data.value = r
+    })
+}
+
+function delete_notice(id: number) {
+    get('/notice/delete/' + id).then(r => {
+        if(r) {
+            message.success('删除成功')
+            notice_query_all()
+        }else{
+            message.warning('删除失败')
+        }
+    })
+}
+
+onMounted(() => {
+    notice_query_all()
+})
 </script>
 
 <template>

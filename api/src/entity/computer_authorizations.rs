@@ -10,7 +10,7 @@ pub struct Model {
     pub authorization_id: i64,
     #[sea_orm(unique)]
     pub computer_id: String,
-    pub expires_at: Option<DateTimeUtc>,
+    pub expires_at: Option<DateTime>,
     pub is_active: Option<i8>,
 }
 

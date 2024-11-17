@@ -1,4 +1,6 @@
+import { to_login } from "@/hoooks/router";
 import axios from "axios";
+import { message } from "./discrete_api";
 const axios_util = axios.create({
     baseURL: "http://localhost:8888",
     timeout: 60000
@@ -14,6 +16,7 @@ interface ApiResponse<T> {
 axios_util.interceptors.request.use(
     config => {
         config.headers.Authorization = localStorage.getItem('token')
+
         return config;
     },
     error => {
@@ -26,6 +29,11 @@ axios_util.interceptors.response.use(
         return response.data;
     },
     error => {
+        if(error.response.status === 401) {
+            message.warning('请重新登录');
+            to_login()
+        }
+        
         return Promise.reject(error);
     }
 )

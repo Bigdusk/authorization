@@ -34,3 +34,8 @@ export function to_history_cdk() {
 export function to_show_cdk() {
     router.push('/admin/show_cdk')
 }
+
+//所有cdk
+export function to_login() {
+    router.push('/login')
+}

@@ -11,9 +11,9 @@ pub struct Model {
     pub title: String,
     #[sea_orm(column_type = "Text")]
     pub content: String,
-    pub published_by: i64,
-    pub publish_date: Option<DateTimeUtc>,
-    pub expiration_date: Option<DateTimeUtc>,
+    pub user_id: i64,
+    pub publish_date: Option<DateTime>,
+    pub expiration_date: Option<DateTime>,
     pub is_active: Option<i8>,
 }
 

@@ -10,7 +10,7 @@ pub struct Model {
     pub log_id: i64,
     pub user_id: i64,
     pub ip_address: String,
-    pub login_time: Option<DateTimeUtc>,
+    pub login_time: Option<DateTime>,
     pub location: Option<String>,
 }
 

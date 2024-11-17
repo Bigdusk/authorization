@@ -13,8 +13,8 @@ pub struct Model {
     pub hostname: Option<String>,
     pub location: Option<String>,
     pub authorization_id: Option<i64>,
-    pub start_at: Option<DateTimeUtc>,
-    pub last_seen: Option<DateTimeUtc>,
+    pub start_at: Option<DateTime>,
+    pub last_seen: Option<DateTime>,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

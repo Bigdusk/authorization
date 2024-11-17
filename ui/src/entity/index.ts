@@ -33,6 +33,15 @@ export interface CardKeyInfo {
     num: number
 }
 
+export interface Notice {
+    announcement_id: number
+    title: string
+    content: string
+    user_id: number
+    publish_date: string | null
+    expiration_date: string | null
+    is_active: number
+}
 
 
 

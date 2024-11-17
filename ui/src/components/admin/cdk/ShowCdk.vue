@@ -49,7 +49,7 @@ const exportSorterAndFilterCsv = () =>
 
 function query_all_card_key() {
     spin_show.value = true
-    get<CardKeys[]>('/query_all_card_key')
+    get<CardKeys[]>('/card_key/query/all')
         .then(r => {
             r.forEach(element => {
                 if (element.is_active === 0) {
