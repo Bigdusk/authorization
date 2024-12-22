@@ -3,9 +3,7 @@
 </script>
 
 <template>
-    <n-button type="primary">
-      Primary
-    </n-button>
+    <h1>hhzx软件授权系统</h1>
 </template>
 
 <style scoped>

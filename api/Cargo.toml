@@ -5,15 +5,15 @@ edition = "2021"
 
 [dependencies]
 # axum web框架
-axum = "0.7.7"
+axum = "0.7.9"
 # 异步运行框架
 tokio = { version = "1.41.1", features = ["full"] }
 # 中间件
 tower = "0.5.1"
 # 数据库操作
-sea-orm = { version = "1.1.0", features = [ "sqlx-mysql", "runtime-tokio-rustls", "macros", "debug-print", "with-chrono" ] }
+sea-orm = { version = "1.1.1", features = [ "sqlx-mysql","runtime-tokio-rustls", "macros", "debug-print", "with-chrono" ] }
 # 跨域中间件
-tower-http = { version = "0.6.1", features = ["full"] }
+tower-http = { version = "0.6.2", features = ["full"] }
 # 配置读取库
 dotenv = "0.15.0"
 # 序列化

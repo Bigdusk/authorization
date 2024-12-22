@@ -35,6 +35,16 @@ pub async fn notice_query_all(
     }
 }
 
+pub async fn notice_query_latest(
+    State(db): State<DatabaseConnection>,
+) -> Json<Value>{
+    let r = announcements::Entity::find().all(&db).await;
+    match r {
+        Ok(r) => ResultUtils::success(Some(r)),
+        Err(r) => ResultUtils::<String>::error(r.to_string()),
+    }
+}
+
 pub async fn notice_delete(
     State(db): State<DatabaseConnection>,
     Path(id): Path<i64>

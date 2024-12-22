@@ -2,7 +2,7 @@ import { to_login } from "@/hoooks/router";
 import axios from "axios";
 import { message } from "./discrete_api";
 const axios_util = axios.create({
-    baseURL: "http://localhost:8888",
+    baseURL: "http://api.hhzx.top:7777",
     timeout: 60000
 });
 

@@ -142,7 +142,7 @@ pub async fn redeem_card_key(
         },
     };
 
-    //在查卡密数据
+    //再查卡密数据
     let current_card_key = card_keys::Entity::find()
     .filter(
         Condition::all()
@@ -159,6 +159,7 @@ pub async fn redeem_card_key(
             return ResultUtils::<String>::error("查询兑换码错误".into());
         }
     };
+
     let current_card_key = match current_card_key {
         Some(r) => {
             if r.is_active == Some(0) {
@@ -179,7 +180,7 @@ pub async fn redeem_card_key(
         Err(_) => return ResultUtils::<String>::error("事务出错".into()),
     };
 
-    //改变天数
+    //改变天数,在已经有的天数上增加
     let day = current_card_key.value.clone();
     let day = match day {
         Some(r) => {
@@ -197,7 +198,13 @@ pub async fn redeem_card_key(
 
     let mut new_computer = current_computer.clone().into_active_model();
 
-    new_computer.expires_at = Set(Local::now().naive_local().checked_add_days(Days::new(day)));
+    //判断当前时间是否已经授权，如果在使用期限范围内则直接添加时间
+    if current_computer.expires_at.unwrap() > Local::now().naive_local() {
+        let temp_time = current_computer.expires_at.clone().unwrap();
+        new_computer.expires_at = Set(temp_time.checked_add_days(Days::new(day)));
+    }else {
+        new_computer.expires_at = Set(Local::now().naive_local().checked_add_days(Days::new(day)));
+    }
 
     let _ = new_computer.update(&txn).await;
 

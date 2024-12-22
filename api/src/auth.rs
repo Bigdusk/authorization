@@ -69,6 +69,7 @@ fn allow_path_all() -> Vec<&'static str> {
         "/login",
         "/computer/auth",
         "/computer/info",
-        "/card_key/redeem"
+        "/card_key/redeem",
+        "/notice/query/all"
     ]
 }
